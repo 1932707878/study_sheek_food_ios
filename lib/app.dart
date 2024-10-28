@@ -9,6 +9,10 @@ class SheekApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primaryColor: Colors.greenAccent,
+          highlightColor: Color.fromRGBO(0, 0, 0, 0),
+          splashColor: Color.fromRGBO(0, 0, 0, 0)),
       navigatorKey: RouteUtils.navigatorKey,
       onGenerateRoute: Routes.generateRoute,
       initialRoute: RoutePath.tab,

@@ -20,33 +20,111 @@ class _TabPageState extends State<TabPage> {
   final List<BottomNavigationBarItem> _items = [
     BottomNavigationBarItem(
       label: '',
-      icon: SizedBox(
-        height: 80,
-        child: Center(
-          child: Image.asset('assets/icons/tab/tab_home.png'),
-        ),
+      icon: Image.asset(
+        'assets/icons/tab/tab_home.png',
+        width: 24,
+        height: 24,
       ),
-      activeIcon: Image.asset('assets/icons/tab/tab_home_select.png'),
-    ),
-    BottomNavigationBarItem(
-      label: '',
-      icon: SizedBox(
-        height: 60,
-        child: Center(
-          child: Image.asset('assets/icons/tab/tab_recipe.png'),
-        ),
+      // activeIcon: Image.asset('assets/icons/tab/tab_home_select.png'),
+      activeIcon: Column(
+        children: [
+          Image.asset(
+            'assets/icons/tab/tab_home_select.png',
+            width: 24,
+            height: 24,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: Container(
+              height: 2,
+              width: 10,
+              color: Color(0xffC0A368),
+              margin: EdgeInsets.only(top: 6),
+            ),
+          )
+        ],
       ),
-      activeIcon: Image.asset('assets/icons/tab/tab_recipe_select.png'),
     ),
     BottomNavigationBarItem(
       label: '',
-      icon: Image.asset('assets/icons/tab/tab_restaurant.png'),
-      activeIcon: Image.asset('assets/icons/tab/tab_restaurant_select.png'),
+      icon: Image.asset(
+        'assets/icons/tab/tab_recipe.png',
+        width: 24,
+        height: 24,
+      ),
+      activeIcon: Column(
+        children: [
+          Image.asset(
+            'assets/icons/tab/tab_recipe_select.png',
+            width: 24,
+            height: 24,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: Container(
+              height: 2,
+              width: 10,
+              color: Color(0xffC0A368),
+              margin: EdgeInsets.only(top: 6),
+              // decoration: BoxDecoration(color: Color(0xffC0A368)),
+            ),
+          )
+        ],
+      ),
     ),
     BottomNavigationBarItem(
       label: '',
-      icon: Image.asset('assets/icons/tab/tab_profile.png'),
-      activeIcon: Image.asset('assets/icons/tab/tab_profile_select.png'),
+      icon: Image.asset(
+        'assets/icons/tab/tab_restaurant.png',
+        width: 24,
+        height: 24,
+      ),
+      activeIcon: Column(
+        children: [
+          Image.asset(
+            'assets/icons/tab/tab_restaurant_select.png',
+            width: 24,
+            height: 24,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: Container(
+              height: 2,
+              width: 10,
+              color: Color(0xffC0A368),
+              margin: EdgeInsets.only(top: 6),
+              // decoration: BoxDecoration(color: Color(0xffC0A368)),
+            ),
+          )
+        ],
+      ),
+    ),
+    BottomNavigationBarItem(
+      label: '',
+      icon: Image.asset(
+        'assets/icons/tab/tab_profile.png',
+        width: 24,
+        height: 24,
+      ),
+      activeIcon: Column(
+        children: [
+          Image.asset(
+            'assets/icons/tab/tab_profile_select.png',
+            width: 24,
+            height: 24,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: Container(
+              height: 2,
+              width: 10,
+              color: Color(0xffC0A368),
+              margin: EdgeInsets.only(top: 6),
+              // decoration: BoxDecoration(color: Color(0xffC0A368)),
+            ),
+          )
+        ],
+      ),
     )
   ];
 
@@ -59,20 +137,21 @@ class _TabPageState extends State<TabPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xff4E4A55),
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: _items,
-      ),
-    );
+        body: _pages[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color(0xff4E4A55),
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedIconTheme: const IconThemeData(size: 20),
+          unselectedIconTheme: const IconThemeData(size: 20),
+          currentIndex: _currentIndex,
+          onTap: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: _items,
+        ));
   }
 }
