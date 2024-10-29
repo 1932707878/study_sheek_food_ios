@@ -138,20 +138,23 @@ class _TabPageState extends State<TabPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _pages[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: const Color(0xff4E4A55),
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          selectedIconTheme: const IconThemeData(size: 20),
-          unselectedIconTheme: const IconThemeData(size: 20),
-          currentIndex: _currentIndex,
-          onTap: (int index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          items: _items,
+        bottomNavigationBar: SizedBox(
+          height: 80,
+          child: BottomNavigationBar(
+            backgroundColor: const Color(0xff4E4A55),
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            selectedFontSize: 0,
+            unselectedFontSize: 0,
+            currentIndex: _currentIndex,
+            onTap: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: _items,
+          ),
         ));
   }
 }
