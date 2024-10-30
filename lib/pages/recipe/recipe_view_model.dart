@@ -2,23 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class RestaurantPage extends StatefulWidget {
-  const RestaurantPage({super.key});
-
-  @override
-  _RestaurantPageState createState() => _RestaurantPageState();
-}
-
-class _RestaurantPageState extends State<RestaurantPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xff595761),
-      body: Center(
-        child: _getRecipeItem(),
-      ),
-    );
-  }
+class RecipeItem extends StatelessWidget {
+  // TODO 组件默认值
 
   Stack _getRecipeItem() {
     return Stack(
@@ -239,6 +224,11 @@ class _RestaurantPageState extends State<RestaurantPage> {
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    throw UnimplementedError();
   }
 }
 

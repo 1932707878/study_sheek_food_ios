@@ -114,12 +114,10 @@ class _HomePageState extends State<HomePage> {
           child: SizedBox(
             child: OverflowBox(
               alignment: Alignment.topLeft,
-              maxHeight: 300,
+              maxHeight: 350,
               maxWidth: 300,
               child: Image.asset(
                 'assets/icons/home/home_chicken.png',
-                width: double.infinity,
-                height: double.infinity,
               ),
             ),
           ),
