@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -11,8 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // 界面数据
+  /// 界面数据
   var data = HomeViewModel.initData();
+
+  /// 搜索值
+  var searchValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -39,36 +43,26 @@ class _HomePageState extends State<HomePage> {
                           // 内部主体
                           Center(
                             child: Container(
-                              margin: const EdgeInsets.only(left: 32, right: 5),
+                              margin: const EdgeInsets.only(left: 32),
                               child: Column(
                                 children: [
                                   // 标题
                                   _titleContainer(data.title),
                                   // 简介
                                   _introContainer(data.intro),
-                                  // 标签
-                                  Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 32, right: 48),
-                                      width: double.infinity,
-                                      child: Row(
-                                        children: showTags(data.tags),
-                                      )),
-                                  // 卡路里
-                                  _calorieContainer(data.kCalorie)
                                 ],
                               ),
                             ),
                           ),
-                          Expanded(child: Container()),
-                          _getBottomPrice(data.order, data.cook)
-                          // 底部价格
+                          Expanded(
+                            child: _getMainView(),
+                          ),
                         ],
                       ),
                     ),
                     Expanded(
                       child: Container(
-                        height: 480,
+                        height: 520,
                         margin: const EdgeInsets.only(left: 16, bottom: 20),
                         color: const Color(0xffF2F2F9).withOpacity(0.2),
                       ),
@@ -83,6 +77,74 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// ### 主体
+  ///
+  /// 包括标签、卡路里、图片、价格
+  Stack _getMainView() {
+    return Stack(
+      children: [
+        // 三角背景
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: ClipPath(
+            clipper: TriangleClipper(),
+            child: SizedBox(
+              height: 280,
+              width: double.infinity,
+              child: Image.asset(
+                'assets/icons/home/home_bg.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: _getBottomPrice(data.order, data.cook),
+        ),
+        Positioned(
+          top: 40,
+          bottom: 100,
+          left: 100,
+          right: 0,
+          child: SizedBox(
+            child: OverflowBox(
+              alignment: Alignment.topLeft,
+              maxHeight: 300,
+              maxWidth: 300,
+              child: Image.asset(
+                'assets/icons/home/home_chicken.png',
+                width: double.infinity,
+                height: double.infinity,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+            top: 0,
+            left: 32,
+            right: 0,
+            child: Column(
+              children: [
+                // 标签
+                Container(
+                    margin: const EdgeInsets.only(top: 32, right: 48),
+                    width: double.infinity,
+                    child: Row(
+                      children: showTags(data.tags),
+                    )),
+                // 卡路里
+                _calorieContainer(data.kCalorie),
+              ],
+            )),
+      ],
+    );
+  }
+
   /// 底部价格
   ///
   /// - order order价
@@ -90,7 +152,6 @@ class _HomePageState extends State<HomePage> {
   SizedBox _getBottomPrice(double order, double cook) {
     return SizedBox(
       height: 56,
-      width: double.infinity,
       child: Row(
         children: [
           Expanded(
@@ -262,21 +323,50 @@ class _HomePageState extends State<HomePage> {
   Container _searchContainer() {
     return Container(
       margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-      alignment: Alignment.centerRight,
       width: double.infinity,
       decoration: BoxDecoration(
           color: const Color(0xffECECEC).withOpacity(0.9),
           borderRadius: BorderRadius.circular(20)),
-      child: Container(
-          child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Image.asset(
-          'assets/icons/home/home_search.png',
-          width: 20,
-          height: 20,
+      child: SizedBox(
+        height: 40,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.all(2),
+                child: TextField(
+                  onChanged: (value) => searchValue = value,
+                  onSubmitted: (value) => _searchHomeFood(),
+                  decoration: const InputDecoration(
+                    hintText: 'Food name',
+                    border: InputBorder.none,
+                  ),
+                  style: const TextStyle(height: 1.55),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () => _searchHomeFood(),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Image.asset(
+                  'assets/icons/home/home_search.png',
+                  width: 20,
+                  height: 20,
+                ),
+              ),
+            ),
+          ],
         ),
-      )),
+      ),
     );
+  }
+
+  /// 搜索首页食物
+  _searchHomeFood() {
+    log('开始搜索：$searchValue');
   }
 }
 
@@ -285,7 +375,7 @@ class TriangleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     var path = Path();
     path.moveTo(size.width, 0);
-    path.lineTo(0, size.height);
+    path.lineTo(20, size.height);
     path.lineTo(size.width, size.height);
     path.close();
     return path;

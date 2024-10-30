@@ -1,7 +1,7 @@
-// 路由管理类
 import 'package:flutter/material.dart';
 import 'package:study_sheek_food_ios/pages/tab_page.dart';
 
+// 路由管理类
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -33,6 +33,7 @@ class Routes {
   }
 }
 
+/// 路由路径
 class RoutePath {
   /// 首页
   static const String tab = '/';

@@ -23,12 +23,12 @@ class HomeViewModel {
   static HomeViewModel initData() {
     return HomeViewModel(
       id: '1',
-      title: 'Chinese Dumplings',
-      intro: 'Chinese dumplings filled with shrimps - called Har Gow.',
-      tags: ['FISH', 'CHINESE'],
-      kCalorie: 220,
-      order: 6.50,
-      cook: 4,
+      title: 'Pan-Seared Chicken',
+      intro: 'Pan-seared chicken in a sweetend mustard sauce.',
+      tags: ['CHICKEN'],
+      kCalorie: 257,
+      order: 12,
+      cook: 9,
       img: 'img',
     );
   }

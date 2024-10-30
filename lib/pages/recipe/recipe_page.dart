@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:study_sheek_food_ios/common/tab_indicator_widgets.dart';
 
 class RecipePage extends StatefulWidget {
   @override
@@ -10,29 +11,39 @@ class RecipePage extends StatefulWidget {
 class _RecipePageState extends State<RecipePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          width: 300,
-          height: 300,
-          color: Colors.black87,
-          child: Stack(
-            children: [
-              Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: ClipPath(
-                    clipper: TriangleClipper(),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      color: Colors.white,
-                    ),
-                  ))
-            ],
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color(0xff595761),
+            title: const TabBar(
+              labelColor: Color(0xffe5c27a),
+              labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              unselectedLabelColor: Color.fromARGB(255, 197, 192, 192),
+              // indicatorPadding:
+              //     EdgeInsets.only(bottom: 5, left: -10, right: -10),
+              indicator: CustomUnderlineTabIndicator(
+                width: -1,
+                borderSide: BorderSide(width: 4, color: Color(0xffe5c27a)),
+                insets: EdgeInsets.only(bottom: 5, left: -10, right: -10),
+              ),
+              dividerHeight: 0,
+              tabs: [
+                Tab(child: Text('Basics')),
+                Tab(child: Text('Fast Dishes')),
+              ],
+            ),
           ),
-        ),
-      ),
+          body: Container(
+            color: const Color(0xff6A6872),
+            child: Column(
+              children: [
+                // 顶部导航栏
+                Container()
+                // 内容主体
+              ],
+            ),
+          )),
     );
   }
 }
