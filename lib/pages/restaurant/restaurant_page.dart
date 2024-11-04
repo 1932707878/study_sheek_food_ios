@@ -64,7 +64,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
               alignment: Alignment.centerRight,
               maxHeight: 210,
               child: Image.asset(
-                'assets/icons/home/home_patatas.png',
+                // 'assets/icons/home/home_patatas.png',
+                'assets/icons/home/home_chicken.png',
                 fit: BoxFit.contain,
               ),
             ),
